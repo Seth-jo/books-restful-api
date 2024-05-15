@@ -3,6 +3,8 @@
 namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use App\Models\Genre;
 
 class StoreAuthorRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreAuthorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,16 @@ class StoreAuthorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required','string'],
+            ''=> ['required','boolean'],
+            'genreId'=>['required',Rule::in(Genre::all()->pluck('id')->toArray())],
+
         ];
+    }
+
+    protected function prepareForValidation(){
+        $this->merge([
+            'genre_id' => $this->genreId
+        ]);
     }
 }
