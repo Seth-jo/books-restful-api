@@ -8,7 +8,8 @@ use App\Filters\ApiFilter;
 class BookFilter extends ApiFilter{
     protected $allowed_params = [
         'id' => ['eq'],
-        'title' => ['eq'],
+        'title' => ['eq','lk'],
+        'isbn'=> ['eq','lk'],
         'genreId' => ['eq'],
         'authorId'=> ['eq']
     ];
@@ -16,12 +17,15 @@ class BookFilter extends ApiFilter{
     protected $column_map = [
         'id'=> 'id',
         'title'=> 'title',
+        'isbn'=> 'isbn',
         'genreId'=> 'genre_id',
         'authorId'=> 'author_id',
     ];
 
     protected $operator_map = [
-        'eq' => '='
+        'eq' => '=',
+        'in'=> 'IN',
+        'lk'=> 'LIKE'
     ];
 
 }

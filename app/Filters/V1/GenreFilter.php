@@ -17,7 +17,9 @@ class GenreFilter extends ApiFilter{
     ];
 
     protected $operator_map = [
-        'eq' => '='
+        'eq' => '=',
+        'in'=> 'IN',
+        'lk'=> 'LIKE'
     ];
 
 }
